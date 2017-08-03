@@ -7,7 +7,9 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+    , logging = require('./routes/logging');
+
 
 var app = express();
 
@@ -21,6 +23,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+    app.use('/logging', logging);
 });
 
 app.configure('development', function(){
